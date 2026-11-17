@@ -39,27 +39,18 @@ img {
 
 /* ==================== NAVBAR ==================== */
 .navbar {
-    background: rgba(44, 62, 80, 0.95) !important;
-    backdrop-filter: blur(10px);
+    background: #ffffff !important;
     padding: 1rem 0;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand {
-    font-size: 1.8rem;
-    font-weight: 800;
+.navbar-brand, .nav-link {
+    color: #2c3e50 !important;
 }
 
-.navbar-brand i {
-    font-size: 2rem;
-}
-
-.nav-link {
-    font-weight: 500;
-    color: var(--text-light) !important;
-    margin: 0 10px;
-    position: relative;
+.navbar-toggler-icon {
+    filter: invert(1);
 }
 
 .nav-link:hover {
