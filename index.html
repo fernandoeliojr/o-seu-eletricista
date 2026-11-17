@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0">
-                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=600&fit=crop" alt="Eletricista Profissional" class="img-fluid rounded-4 shadow-lg hero-image">
+                    <img src="hero.jpg" alt="Eletricista Profissional" class="img-fluid rounded-4 shadow-lg hero-image">
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="service-card h-100 p-4">
                         <div class="service-icon">
-                            <i class="bi bi-factory-fill"></i>
+                            <i class="bi bi-gear-wide-connected"></i>
                         </div>
                         <h4 class="fw-bold mb-3">Industrial</h4>
                         <ul class="list-unstyled text-muted">
@@ -169,7 +169,7 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="service-card h-100 p-4">
                         <div class="service-icon">
-                            <i class="bi bi-tools-fill"></i>
+                            <i class="bi bi-wrench-adjustable"></i>
                         </div>
                         <h4 class="fw-bold mb-3">Reparos</h4>
                         <ul class="list-unstyled text-muted">
@@ -207,7 +207,7 @@
         <div class="container py-5">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=700&fit=crop" alt="Equipe Meu Eletricista" class="img-fluid rounded-4 shadow">
+                    <img src="sobre.jpg" alt="Equipe Meu Eletricista" class="img-fluid rounded-4 shadow">
                 </div>
                 <div class="col-lg-6 ps-lg-5">
                     <h6 class="text-warning fw-bold mb-2">CONHEÇA NOSSA EMPRESA</h6>
@@ -321,22 +321,23 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <form class="contact-form p-4">
+                    <!-- FORMULARIO VIA FORMSPREE: substitua SEU_ID_AQUI pelo ID do form criado em https://formspree.io -->
+                    <form class="contact-form p-4" action="https://formspree.io/f/SEU_ID_AQUI" method="POST" id="formContato" novalidate>
                         <h4 class="fw-bold mb-4">Envie sua Mensagem</h4>
 
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Nome completo</label>
-                            <input type="text" class="form-control" placeholder="Seu nome" required>
+                            <label class="form-label fw-semibold" for="nome">Nome completo</label>
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Telefone/WhatsApp</label>
-                            <input type="tel" class="form-control" placeholder="(DD) número" required>
+                            <label class="form-label fw-semibold" for="telefone">Telefone/WhatsApp</label>
+                            <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(DD) número" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Tipo de Serviço</label>
-                            <select class="form-select" required>
+                            <label class="form-label fw-semibold" for="servico">Tipo de Serviço</label>
+                            <select class="form-select" id="servico" name="servico" required>
                                 <option value="">Selecione</option>
                                 <option value="residencial">Residencial</option>
                                 <option value="comercial">Comercial</option>
@@ -348,11 +349,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Mensagem</label>
-                            <textarea class="form-control" rows="5" placeholder="Descreva seu projeto ou necessidade..." required></textarea>
+                            <label class="form-label fw-semibold" for="mensagem">Mensagem</label>
+                            <textarea class="form-control" id="mensagem" name="mensagem" rows="5" placeholder="Descreva seu projeto ou necessidade..." required></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-warning fw-bold rounded-pill w-100 py-3">
+                        <div id="formFeedback" class="alert d-none mb-3" role="alert"></div>
+
+                        <button type="submit" class="btn btn-warning fw-bold rounded-pill w-100 py-3" id="btnEnviar">
                             <i class="bi bi-send-fill me-2"></i>Enviar Mensagem
                         </button>
                     </form>
@@ -452,6 +455,54 @@
                 navbar.classList.remove('navbar-dark');
             }
         });
+
+        // Envio do formulário via Formspree (AJAX)
+        (function () {
+            var form = document.getElementById('formContato');
+            var btn = document.getElementById('btnEnviar');
+            var feedback = document.getElementById('formFeedback');
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Validação nativa
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                var original = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Enviando...';
+                feedback.classList.add('d-none');
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                })
+                .then(function (res) {
+                    if (res.ok) {
+                        feedback.className = 'alert alert-success mb-3';
+                        feedback.textContent = 'Mensagem enviada com sucesso! Retornaremos em breve.';
+                        form.reset();
+                        form.classList.remove('was-validated');
+                    } else {
+                        throw new Error('erro');
+                    }
+                })
+                .catch(function () {
+                    feedback.className = 'alert alert-danger mb-3';
+                    feedback.textContent = 'Não foi possível enviar. Tente novamente ou chame no WhatsApp.';
+                })
+                .finally(function () {
+                    feedback.classList.remove('d-none');
+                    btn.disabled = false;
+                    btn.innerHTML = original;
+                });
+            });
+        })();
     </script>
 </body>
 </html>
