@@ -1,0 +1,9 @@
+# Ignorar arquivos temporários e sensíveis
+.DS_Store
+*.log
+*.tmp
+.env
+.env.local
+.env.*
+node_modules/
+img/
