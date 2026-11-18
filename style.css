@@ -356,18 +356,18 @@ footer a:hover {
 /* ==================== RESPONSIVIDADE ==================== */
 @media (max-width: 991px) {
     .navbar-collapse {
-        background: rgba(44, 62, 80, 0.98);
+        background: #ffc107 !important;
         padding: 1.5rem;
         border-radius: 10px;
         margin-top: 1rem;
     }
 
-    .navbar-nav {
-        text-align: center;
+    .navbar-brand, .nav-link {
+        color: #1a1a2e !important;
     }
 
-    .nav-link {
-        margin: 0.5rem 0;
+    .navbar-toggler-icon {
+        filter: invert(0);
     }
 
     .hero-text h1 {
