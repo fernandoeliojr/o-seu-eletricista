@@ -354,29 +354,16 @@ footer a:hover {
 }
 
 /* ==================== RESPONSIVIDADE ==================== */
+/* Ajustes Mobile e Cabeçalho */
 @media (max-width: 991px) {
-    .navbar-collapse {
-        background: #ffffff !important;
-        padding: 1.5rem;
-        border-radius: 10px;
-        margin-top: 1rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    .hero-section {
+        padding-top: 150px; /* Aumenta espaço superior no hero para não tampar */
     }
-
-    .navbar-brand, .nav-link {
-        color: #2c3e50 !important;
+    .hero-text {
+        text-align: center;
     }
-
-    .navbar-toggler-icon {
-        filter: invert(0);
-    }
-
-    .hero-text h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-text p {
-        font-size: 1.1rem;
+    .hero-text .d-flex.gap-3 {
+        justify-content: center; /* Centraliza o botão */
     }
 }
 
