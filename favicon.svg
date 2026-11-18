@@ -1,4 +1,6 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="32" cy="32" r="30" fill="#2c3e50"/>
-    <path d="M38 20L26 38H32L26 44L38 26H32L38 20Z" fill="#ffc107"/>
+    <!-- Fundo amarelo vibrante para alto contraste -->
+    <circle cx="32" cy="32" r="30" fill="#ffc107"/>
+    <!-- Raio em azul escuro para dar contraste -->
+    <path d="M38 20L26 38H32L26 44L38 26H32L38 20Z" fill="#1a1a2e"/>
 </svg>
